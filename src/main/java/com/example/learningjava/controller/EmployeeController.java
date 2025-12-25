@@ -25,7 +25,7 @@ public class EmployeeController {
 
     @GetMapping("/dummy")
     public List<String> test() {
-        return List.of("OK");
+        return List.of("HIIIHIHIHI");
     }
 
     @GetMapping
@@ -47,12 +47,4 @@ public class EmployeeController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
-
-//    echo "# employee-management" >> README.md
-//    git init
-//    git add README.md
-//    git commit -m "first commit"
-//    git branch -M main
-//    git remote add origin https://github.com/mohammedfahimullah23/employee-management.git
-//    git push -u origin main
 }
