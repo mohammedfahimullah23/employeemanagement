@@ -42,5 +42,6 @@ jobs:
     - name: Deploy to Web App
       uses: azure/webapps-deploy@v3
       with:
-        app-name: learningdev1s-hcb4h4c0hwcjb9ba
+        app-name: learningdev1s
+        resource-group-name: learning-dev
         images: crlearningdev.azurecr.io/learning:${{ github.sha }}
