@@ -25,7 +25,7 @@ public class EmployeeController {
 
     @GetMapping("/dummy")
     public List<String> test() {
-        return List.of("HIIIHIHIHI");
+        return List.of("BYE");
     }
 
     @GetMapping
