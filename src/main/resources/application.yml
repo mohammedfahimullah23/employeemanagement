@@ -22,8 +22,8 @@ spring:
 
   datasource:
     url: ${sqldburl}
-    username: ${sqldbusername}
-    password: ${sqldbpassword}
+#    username: ${sqldbusername}
+#    password: ${sqldbpassword}
 
 
   jpa:
