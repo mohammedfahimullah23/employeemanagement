@@ -21,7 +21,8 @@ spring:
 
 
   datasource:
-    url: ${sqldburl}
+    url: ${sqldburlauthentication}
+#    url: ${sqldburl}
 #    username: ${sqldbusername}
 #    password: ${sqldbpassword}
 
