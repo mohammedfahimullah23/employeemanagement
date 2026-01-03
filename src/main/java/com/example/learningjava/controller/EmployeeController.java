@@ -3,6 +3,7 @@ package com.example.learningjava.controller;
 import com.example.learningjava.model.Employee;
 import com.example.learningjava.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
+
+    @Value("${app.oauth2.redirect-uri}")
+    private String redirectUri;
 
     private final EmployeeService service;
 
@@ -30,7 +34,7 @@ public class EmployeeController {
 
     @GetMapping("/dummy")
     public List<String> test() {
-        return List.of("hiiiissss");
+        return List.of("hiiiissss" + redirectUri);
     }
 
 
