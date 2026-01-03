@@ -1,19 +1,14 @@
-#spring:
-#  datasource:
-#    url: jdbc:sqlserver://school.database.windows.net:1433;database=school
-#    username: adminfahim
-#    password: adminadmin1@
-#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 azure:
   function:
     base-url: https://azurefunctions-1766754802726.azurewebsites.net
     process-employee-path: /api/employees/process
     timeout-ms: 10000
-app:
-  oauth2:
-    redirect-uri: http://localhost:3000/oauth-success
 jwt:
   secret: ${learning-app-jwt-secret}
+app:
+  oauth2:
+    redirect-uri: https://learningdev1s-hcb4h4c0hwcjb9ba.centralus-01.azurewebsites.net/oauth-success
+
 spring:
   security:
     oauth2:
@@ -31,13 +26,9 @@ spring:
         secret:
           property-sources:
             - endpoint: https://learningjava-kv.vault.azure.net/
-  datasource:
-    url: jdbc:sqlserver://school.database.windows.net:1433;
-      database=school;
-      encrypt=true;
-      trustServerCertificate=false;
-      authentication=ActiveDirectoryDefault;
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    datasource:
+      url: ${sqldburlauthentication}
+
   jpa:
     hibernate:
       ddl-auto: update

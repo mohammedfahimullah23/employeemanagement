@@ -5,6 +5,7 @@ import com.example.learningjava.model.User;
 import com.example.learningjava.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -16,8 +17,14 @@ import java.io.IOException;
 public class OAuthSuccessHandler
         implements AuthenticationSuccessHandler {
 
+    @Value("${app.oauth2.redirect-uri}")
+    private String redirectUri;
+
     private final UserService userService;
     private final JwtUtil jwtUtil;
+
+
+
 
     public OAuthSuccessHandler(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
@@ -36,6 +43,8 @@ public class OAuthSuccessHandler
         String jwt = jwtUtil.generateAccessToken(user);
 
         response.sendRedirect(
-                "http://localhost:3000/oauth-success?token=" + jwt);
+                redirectUri + "?token=" + jwt
+        );
+
     }
 }
