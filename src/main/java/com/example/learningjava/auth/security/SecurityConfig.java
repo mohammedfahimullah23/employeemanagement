@@ -14,7 +14,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.intercept.AuthorizationFilter;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import java.util.List;
 
@@ -26,7 +29,9 @@ public class SecurityConfig {
                         JwtFilter jwtFilter,
                         RequestIdFilter requestIdFilter,
                         OAuthSuccessHandler oAuthSuccessHandler,
-                        CustomOAuth2UserService customOAuth2UserService) throws Exception {
+                        CustomOAuth2UserService customOAuth2UserService,
+                        NotFoundAuthenticationEntryPoint notFoundAuthenticationEntryPoint,
+                        ForbiddenAccessDeniedHandler forbiddenAccessDeniedHandler) throws Exception {
 
                 http
                                 .cors(Customizer.withDefaults())
@@ -39,12 +44,21 @@ public class SecurityConfig {
                                                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                                 .requestMatchers("/auth/**").permitAll()
                                                 .requestMatchers("/oauth2/**", "/login/oauth2/**").permitAll()
-                                                .anyRequest().authenticated())
+                                                .requestMatchers("/api/**").authenticated()
+                                                .anyRequest().permitAll())
+                                .exceptionHandling(ex -> ex
+                                                .defaultAuthenticationEntryPointFor(
+                                                                notFoundAuthenticationEntryPoint,
+                                                                new AntPathRequestMatcher("/api/**"))
+                                                .accessDeniedHandler(forbiddenAccessDeniedHandler))
+                                // If we go to different path which is not found then we need to show not found,
+                                // without this it was showing github error page
+
                                 .oauth2Login(oauth -> oauth
                                                 .userInfoEndpoint(userInfo -> userInfo
                                                                 .userService(customOAuth2UserService))
                                                 .successHandler(oAuthSuccessHandler))
-                                .addFilterBefore(requestIdFilter, UsernamePasswordAuthenticationFilter.class)
+                                .addFilterBefore(requestIdFilter, AuthorizationFilter.class)
                                 .addFilterBefore(jwtFilter,
                                                 UsernamePasswordAuthenticationFilter.class)
                                 .formLogin(AbstractHttpConfigurer::disable)
