@@ -156,5 +156,24 @@ This enables passwordless authentication from GitHub Actions.
 - Builds the Docker image
 - Pushes to ACR
 - Deploys to Azure App Service
-- 
 ---
+
+For supporting local development connected to the sql server in the azure
+
+```
+CREATE USER [amanfahi2@gmail.com] FROM EXTERNAL PROVIDER;
+ALTER ROLE db_datareader ADD MEMBER [amanfahi2@gmail.com];
+ALTER ROLE db_datawriter ADD MEMBER [amanfahi2@gmail.com];
+```
+
+Changes in your application.yml file
+
+```
+  datasource:
+      url: jdbc:sqlserver://school.database.windows.net:4566;
+        database=school;
+        encrypt=true;
+        trustServerCertificate=false;
+        authentication=ActiveDirectoryDefault;
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+```

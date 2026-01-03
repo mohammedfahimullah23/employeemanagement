@@ -10,6 +10,9 @@ azure:
     process-employee-path: /api/employees/process
     timeout-ms: 10000
 
+jwt:
+  secret: ${learning-app-jwt-secret}
+
 spring:
   cloud:
     azure:
@@ -19,12 +22,18 @@ spring:
             - endpoint: https://learningjava-kv.vault.azure.net/
 
 
+# For local development
+#  datasource:
+#      url: jdbc:sqlserver://school.database.windows.net:1433;
+#        database=school;
+#        encrypt=true;
+#        trustServerCertificate=false;
+#        authentication=ActiveDirectoryDefault;
+#      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 
+#  For app service
   datasource:
     url: ${sqldburlauthentication}
-#    url: ${sqldburl}
-#    username: ${sqldbusername}
-#    password: ${sqldbpassword}
 
 
   jpa:
