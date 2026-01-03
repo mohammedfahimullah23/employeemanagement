@@ -14,6 +14,16 @@ jwt:
   secret: ${learning-app-jwt-secret}
 
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: "Ov23li9GAfRojGVdRape"
+            client-secret: ${github-client-secret}
+            scope:
+              - read:user
+              - user:email
   cloud:
     azure:
       keyvault:
@@ -21,24 +31,20 @@ spring:
           property-sources:
             - endpoint: https://learningjava-kv.vault.azure.net/
 
-
-# For local development
-#  datasource:
-#      url: jdbc:sqlserver://school.database.windows.net:1433;
-#        database=school;
-#        encrypt=true;
-#        trustServerCertificate=false;
-#        authentication=ActiveDirectoryDefault;
-#      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-
-#  For app service
+  # For local development
   datasource:
-    url: ${sqldburlauthentication}
+    url: jdbc:sqlserver://school.database.windows.net:1433;
+      database=school;
+      encrypt=true;
+      trustServerCertificate=false;
+      authentication=ActiveDirectoryDefault;
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 
+  #  For app service
+  #  datasource:
+  #    url: ${sqldburlauthentication}
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-
-
