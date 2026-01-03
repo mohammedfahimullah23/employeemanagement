@@ -155,6 +155,6 @@ This enables passwordless authentication from GitHub Actions.
 - Logs into Azure
 - Builds the Docker image
 - Pushes to ACR
--Deploys to Azure App Service
+- Deploys to Azure App Service
 
 ---
