@@ -23,9 +23,6 @@ public class OAuthSuccessHandler
     private final UserService userService;
     private final JwtUtil jwtUtil;
 
-
-
-
     public OAuthSuccessHandler(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
@@ -43,8 +40,7 @@ public class OAuthSuccessHandler
         String jwt = jwtUtil.generateAccessToken(user);
 
         response.sendRedirect(
-                redirectUri + "?token=" + jwt
-        );
+                redirectUri + "?token=" + jwt);
 
     }
 }
