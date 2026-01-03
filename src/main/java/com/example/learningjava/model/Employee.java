@@ -1,26 +1,21 @@
 package com.example.learningjava.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "employees", schema = "dbo")
 public class Employee {
 
-    // ✅ Required by JPA
     public Employee() {
     }
 
-    // Optional convenience constructor
-    public Employee(Long id, String name, String email, String department, Double salary) {
+    public Employee(Long id, String name, String email, String department, Double salary, String profilePictureUrl) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.department = department;
         this.salary = salary;
+        this.profilePictureUrl = profilePictureUrl;
     }
 
     @Id
@@ -31,6 +26,9 @@ public class Employee {
     private String email;
     private String department;
     private Double salary;
+
+    @Column(name = "profile_image_url")
+    private String profilePictureUrl;
 
     public Long getId() {
         return id;
@@ -70,5 +68,13 @@ public class Employee {
 
     public void setSalary(Double salary) {
         this.salary = salary;
+    }
+
+    public String getProfilePictureUrl() {
+        return profilePictureUrl;
+    }
+
+    public void setProfilePictureUrl(String profilePictureUrl) {
+        this.profilePictureUrl = profilePictureUrl;
     }
 }

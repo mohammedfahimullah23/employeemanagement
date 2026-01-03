@@ -9,6 +9,9 @@ azure:
     base-url: https://azurefunctions-1766754802726.azurewebsites.net
     process-employee-path: /api/employees/process
     timeout-ms: 10000
+  storage:
+    container-name: "profile-pictures"
+    account-name: "4cbaee0be46d45bdbdcd"
 app:
   oauth2:
     redirect-uri: http://localhost:3000/oauth-success
