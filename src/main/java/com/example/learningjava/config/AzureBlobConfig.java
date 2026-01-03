@@ -17,6 +17,10 @@ public class AzureBlobConfig {
         return new DefaultAzureCredentialBuilder().build();
     }
 
+    // Suppose you want to store different types of files in different containers, it is possible
+    // to create multiple BlobContainerClient beans here with different container names.
+    // Then inject the specific BlobContainerClient where needed using @Qualifier annotation.
+    
     @Bean
     public BlobServiceClient blobServiceClient(
             DefaultAzureCredential credential,
