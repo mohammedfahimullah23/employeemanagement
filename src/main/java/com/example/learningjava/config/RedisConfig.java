@@ -31,7 +31,7 @@ public class RedisConfig {
     public LettuceClientConfiguration lettuceClientConfiguration() {
         return LettuceClientConfiguration.builder()
                 .useSsl()
-                .disablePeerVerification()
+                .disablePeerVerification() // DEV ONLY
                 .build();
     }
 

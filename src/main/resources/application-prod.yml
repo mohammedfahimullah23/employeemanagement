@@ -18,7 +18,7 @@ spring:
       port: 10000
       ssl: true
       username: "default"
-      password: ${redis-password}
+      password: ${redis_password}
       timeout: 10s
   security:
     oauth2:
