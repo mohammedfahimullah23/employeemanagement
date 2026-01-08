@@ -10,7 +10,6 @@ import org.springframework.data.redis.connection.lettuce.LettuceClientConfigurat
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 
-import java.time.Duration;
 
 @Configuration
 @EnableCaching

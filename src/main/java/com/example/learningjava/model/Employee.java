@@ -2,6 +2,8 @@ package com.example.learningjava.model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "employees", schema = "dbo")
 @NamedStoredProcedureQuery(
@@ -16,7 +18,7 @@ import jakarta.persistence.*;
         },
         resultClasses = Employee.class
 )
-public class Employee {
+public class Employee implements Serializable {
 
     public Employee() {
     }
