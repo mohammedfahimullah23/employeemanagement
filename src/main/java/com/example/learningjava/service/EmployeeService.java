@@ -3,6 +3,8 @@ package com.example.learningjava.service;
 import com.example.learningjava.azure_functions.AzureFunctionClient;
 import com.example.learningjava.model.Employee;
 import com.example.learningjava.repository.EmployeeRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,10 +33,12 @@ public class EmployeeService {
         return this.azureFunctionClient.processEmployee(employee);
     }
 
+
     public List<Employee> getAll() {
         return repository.findAll();
     }
 
+    @Cacheable(value = "employees", key = "#id")
     public Employee getById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found"));
@@ -49,6 +53,7 @@ public class EmployeeService {
         return repository.save(existing);
     }
 
+    @CacheEvict(value = "employees", key = "#id")
     public void delete(Long id) {
         repository.deleteById(id);
     }

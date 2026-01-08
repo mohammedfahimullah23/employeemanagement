@@ -19,6 +19,13 @@ app:
 jwt:
   secret: ${learning-app-jwt-secret}
 spring:
+  redis:
+    host: redis.centralus.redis.azure.net
+    port: 10000
+    ssl: true
+    username: "default"
+    password: ${redis-password}
+    timeout: 10s
   security:
     oauth2:
       client:

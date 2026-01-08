@@ -13,6 +13,13 @@ app:
     redirect-uri: https://learningdev1s-hcb4h4c0hwcjb9ba.centralus-01.azurewebsites.net/oauth-success
 
 spring:
+  redis:
+      host: redis.centralus.redis.azure.net
+      port: 10000
+      ssl: true
+      username: "default"
+      password: ${redis-password}
+      timeout: 10s
   security:
     oauth2:
       client:
