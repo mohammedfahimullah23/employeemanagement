@@ -43,3 +43,12 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics
+  metrics:
+    enable:
+      cache: true
