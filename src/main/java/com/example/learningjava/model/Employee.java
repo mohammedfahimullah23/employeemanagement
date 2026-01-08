@@ -4,6 +4,18 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "employees", schema = "dbo")
+@NamedStoredProcedureQuery(
+        name = "Employee.getByDepartment",
+        procedureName = "dbo.sp_get_employees_by_dept",
+        parameters = {
+                @StoredProcedureParameter(
+                        mode = ParameterMode.IN,
+                        name = "department",
+                        type = String.class
+                )
+        },
+        resultClasses = Employee.class
+)
 public class Employee {
 
     public Employee() {

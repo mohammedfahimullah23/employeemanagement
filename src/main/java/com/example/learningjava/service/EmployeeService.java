@@ -4,6 +4,7 @@ import com.example.learningjava.azure_functions.AzureFunctionClient;
 import com.example.learningjava.model.Employee;
 import com.example.learningjava.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -76,5 +77,10 @@ public class EmployeeService {
     public String getProfileImageBlobName(Long employeeId) {
         return repository.findProfileImageBlobById(employeeId)
                 .orElse(null);
+    }
+
+   @Transactional(readOnly = true)
+    public List<Employee> getEmployeeByDepartment(String department) {
+        return repository.getByDepartment(department);
     }
 }

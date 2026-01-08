@@ -15,6 +15,7 @@ azure:
 app:
   oauth2:
     redirect-uri: http://localhost:3000/oauth-success
+#    This redirect uri should be the url of the fronend app.
 jwt:
   secret: ${learning-app-jwt-secret}
 spring:
@@ -43,5 +44,6 @@ spring:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
+#      Hibernate compares entities with DB tables when you use ddl-auto:update.Creates missing rows and table
     show-sql: true
